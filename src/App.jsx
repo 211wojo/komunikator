@@ -1,42 +1,31 @@
-import { useState } from "react";
-import {
-  MessageCircle,
-  Search,
-  Send,
-  User,
-  Settings
-} from "lucide-react";
 
+import { useState } from "react";
 import "./App.css";
 
 function App() {
   const [message, setMessage] = useState("");
 
   const [messages, setMessages] = useState([
-    {
-      id: 1,
-      text: "Cześć!",
-      sender: "other"
-    },
-    {
-      id: 2,
-      text: "Wszystko dobrze!",
-      sender: "me"
-    }
+    { id: 1, 
+     text: "Cześć!", 
+     sender: "other" },
+    { id: 2,
+     text: "Wszystko dobrze!",
+     sender: "me" }
   ]);
 
   function sendMessage() {
-    if (!message.trim()) return;
+    if (message.trim() === "") {
+      return;
+    }
 
-    setMessages([
-      ...messages,
-      {
-        id: Date.now(),
-        text: message,
-        sender: "me"
-      }
-    ]);
+    const newMessage = {
+      id: Date.now(),
+      text: message,
+      sender: "me"
+    };
 
+    setMessages([...messages, newMessage]);
     setMessage("");
   }
 
@@ -44,18 +33,13 @@ function App() {
     <div className="app">
 
       <aside className="sidebar">
-        <h2>
-          <MessageCircle />
-          Komunikator
-        </h2>
+        <h2>Komunikator</h2>
 
         <div className="search">
-          <Search />
           <input placeholder="Szukaj rozmowy..." />
         </div>
 
         <div className="user">
-          <User />
           <div>
             <strong>Jan Kowalski</strong>
             <p>Online</p>
@@ -63,11 +47,12 @@ function App() {
         </div>
 
         <button className="settings">
-          <Settings /> Ustawienia
+          Ustawienia
         </button>
       </aside>
 
       <main className="chat">
+
         <header>
           <h3>Rozmowa</h3>
           <span>Aktywny</span>
@@ -77,7 +62,7 @@ function App() {
           {messages.map((msg) => (
             <div
               key={msg.id}
-              className={`message ${msg.sender}`}
+              className={"message " + msg.sender}
             >
               {msg.text}
             </div>
@@ -85,19 +70,24 @@ function App() {
         </div>
 
         <div className="message-input">
+
           <input
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             onKeyDown={(e) => {
-              if (e.key === "Enter") sendMessage();
+              if (e.key === "Enter") {
+                sendMessage();
+              }
             }}
             placeholder="Napisz wiadomość..."
           />
 
           <button onClick={sendMessage}>
-            <Send />
+            Wyślij
           </button>
+
         </div>
+
       </main>
 
     </div>
