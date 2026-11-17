@@ -35,27 +35,17 @@ function App() {
       <aside className="sidebar">
         <h2>Komunikator</h2>
 
-        <div className="search">
-          <input placeholder="Szukaj rozmowy..." />
-        </div>
-
         <div className="user">
           <div>
-            <strong>Jan Kowalski</strong>
-            <p>Online</p>
+            <h3>Jan Kowalski</h3>
           </div>
         </div>
-
-        <button className="settings">
-          Ustawienia
-        </button>
       </aside>
 
       <main className="chat">
 
         <header>
           <h3>Rozmowa</h3>
-          <span>Aktywny</span>
         </header>
 
         <div className="messages">
